@@ -25,7 +25,7 @@ type Main struct {
 
 	IncomingConnIdleTimeoutSec uint32
 	SendTimeoutSec             uint32
-	OutConnTimeoutSec          uint32
+	OutConnTimeoutMs           uint32
 	MaxHostReconnectPeriodMs   uint32
 	HostReconnectPeriodDeltaMs uint32
 	KeepAliveSec               uint32
@@ -80,7 +80,7 @@ func MakeDefault() Main {
 
 		IncomingConnIdleTimeoutSec: 90,
 		SendTimeoutSec:             5,
-		OutConnTimeoutSec:          5,
+		OutConnTimeoutMs:           5000,
 		MaxHostReconnectPeriodMs:   5000,
 		HostReconnectPeriodDeltaMs: 10,
 		KeepAliveSec:               1,

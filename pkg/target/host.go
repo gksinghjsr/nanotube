@@ -32,7 +32,7 @@ type Host struct {
 	Lg                        *zap.Logger
 	Ms                        *metrics.Prom
 	SendTimeoutSec            uint32
-	ConnTimeoutSec            uint32
+	ConnTimeoutMs             uint32
 	KeepAliveSec              uint32
 	MaxReconnectPeriodMs      uint32
 	ReconnectPeriodDeltaMs    uint32
@@ -73,7 +73,7 @@ func NewHost(clusterName string, mainCfg conf.Main, hostCfg conf.Host, lg *zap.L
 		updateHostHealthStatus: updateHostHealthStatus,
 
 		SendTimeoutSec:            mainCfg.SendTimeoutSec,
-		ConnTimeoutSec:            mainCfg.OutConnTimeoutSec,
+		ConnTimeoutMs:             mainCfg.OutConnTimeoutMs,
 		KeepAliveSec:              mainCfg.KeepAliveSec,
 		MaxReconnectPeriodMs:      mainCfg.MaxHostReconnectPeriodMs,
 		ReconnectPeriodDeltaMs:    mainCfg.MaxHostReconnectPeriodMs,
@@ -217,7 +217,7 @@ func (h *Host) Connect(attemptCount int) {
 
 func (h *Host) getConnectionToHost() (net.Conn, error) {
 	dialer := net.Dialer{
-		Timeout:   time.Duration(h.ConnTimeoutSec) * time.Second,
+		Timeout:   time.Duration(h.ConnTimeoutMs) * time.Millisecond,
 		KeepAlive: time.Duration(h.KeepAliveSec) * time.Second,
 	}
 	conn, err := dialer.Dial("tcp", net.JoinHostPort(h.Name, fmt.Sprint(h.Port)))

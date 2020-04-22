@@ -24,7 +24,7 @@ func TestClustersWithNoAvailableHosts(t *testing.T) {
 			port = 456`
 
 	cfg := conf.MakeDefault()
-	cfg.OutConnTimeoutSec = 1
+	cfg.OutConnTimeoutMs = 1
 	cfg.MaxHostReconnectPeriodMs = 50000
 	cls, _ := conf.ReadClustersConfig(strings.NewReader(clsConfig))
 
@@ -54,7 +54,7 @@ func TestClustersWithAllAvailableHosts(t *testing.T) {
 			port = 456`
 
 	cfg := conf.MakeDefault()
-	cfg.OutConnTimeoutSec = 1
+	cfg.OutConnTimeoutMs = 1
 	cfg.MaxHostReconnectPeriodMs = 50000
 
 	cls, _ := conf.ReadClustersConfig(strings.NewReader(clsConfig))
@@ -101,7 +101,7 @@ func TestClustersWithFlappingHosts(t *testing.T) {
 			port = 456`
 
 	cfg := conf.MakeDefault()
-	cfg.OutConnTimeoutSec = 1
+	cfg.OutConnTimeoutMs = 1
 	cfg.MaxHostReconnectPeriodMs = 50000
 	cls, _ := conf.ReadClustersConfig(strings.NewReader(clsConfig))
 
@@ -166,7 +166,7 @@ func TestRemoveAvailableHosts(t *testing.T) {
 			port = 456`
 
 	cfg := conf.MakeDefault()
-	cfg.OutConnTimeoutSec = 1
+	cfg.OutConnTimeoutMs = 1
 	cfg.MaxHostReconnectPeriodMs = 50000
 
 	cls, _ := conf.ReadClustersConfig(strings.NewReader(clsConfig))
